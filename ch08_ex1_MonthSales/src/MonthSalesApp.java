@@ -5,37 +5,43 @@ public class MonthSalesApp {
     public static void main(String[] args) {
         System.out.println("Monthly Sales\n");
         
-        // declare monthNames and monthSales arrays
+        String[] monthNames = {
+            "January", "February", "March", "April",
+            "May", "June", "July", "August",
+            "September", "October", "November", "December"
+        };
 
+        double[] monthSales = {
+            1200.50, 1500.75, 1784.59, 2100.00,
+            1950.25, 2200.80, 2500.60, 2700.40,
+            3279.62, 2900.10, 3100.55, 5475.85
+        };
 
-        // get currency formatting
         NumberFormat currency = NumberFormat.getCurrencyInstance();
         
-        // get one or more months
         String choice = "y";
         while (choice.equalsIgnoreCase("y")) {
-            // get the input from the user
             int monthNumber = Console.getInt("Enter month number: ");
             
-            // validate input
             if (monthNumber < 1 || monthNumber > 12) {
                 Console.displayLine("Invalid month number. Try again.");
-                continue;                
+                continue;
             }
             
-            // get the index number for the month
-            // and display the month name and sales            
+            int index = monthNumber - 1;
+            Console.displayLine("Sales for " + monthNames[index] + ": " 
+                    + currency.format(monthSales[index]));
 
-
-            // check if the user wants to continue
             choice = Console.getString("Continue? (y/n): ");
             Console.displayLine();
         }
         
-        // display the total sales for the year
+        double totalSales = 0;
+        for (int i = 0; i < monthSales.length; i++) {
+            totalSales += monthSales[i];
+        }
         
-        
+        Console.displayLine("Total sales: " + currency.format(totalSales));
         Console.displayLine();
-    }    
-
+    }
 }
